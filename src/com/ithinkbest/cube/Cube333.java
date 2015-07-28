@@ -3,7 +3,7 @@ package com.ithinkbest.cube;
 public class Cube333 {
 
 	Cube[] cubes;
-	static final String[] mask={
+	static final String[] visibleArray={
 			// lower ring
 			"abc",
 			"bc",
@@ -80,6 +80,7 @@ public class Cube333 {
 		cubes = new Cube[27];
 		for (int i = 0; i < 27; i++) {
 			cubes[i] = new Cube();
+			cubes[i].setVisible(visibleArray[i]);
 		}
 	}
 
@@ -317,15 +318,22 @@ public class Cube333 {
 	public String toDescription() {
 		StringBuilder sb = new StringBuilder();
 		//int[][] color = getColor();
-		String a,b,c,d;
+		String a,b,c,d,e,f,g,h,i;
 		for (int k = 0; k < 26; k++) {
 			a=cubes[k].toString();
-			b= mask[k];
+			b= visibleArray[k];
 			c=this.getMaskedColor(a, b);
 			d=this.getMaskedColorShort(a, b);
+			e=cubes[k].getVisible();
+			f=cubes[k].getVisibleVal();
+			g=cubes[k].getVisibleBaseVal();
+			i=cubes[k].getVisibleDiffVal();
+			
+			
+			
 			
 			//System.out.printf("%2d %s %3s %s\n",k,a,b,c);
-			System.out.printf("%2d %s %s %s\n",k,a,c,d);
+			System.out.printf("%2d %s %6s %3s %6s %3s %3s %3s \n",k,a,c,d,e,f,g,i);
 			
 		}
 		return sb.toString();

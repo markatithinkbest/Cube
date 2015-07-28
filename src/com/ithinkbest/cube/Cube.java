@@ -14,6 +14,10 @@ public class Cube {
 	private int[] baseVal = { 1, 2, 3, 4, 5, 6 };
 	private int[] val = { 1, 2, 3, 4, 5, 6 };
 
+	private int faceCnt;
+	private int[] initialFaceColor = new int[3];
+	private int[] currentFaceColor = new int[3];
+
 	public Cube() {
 		reset();
 	}
@@ -28,6 +32,16 @@ public class Cube {
 			}
 		}
 		return sb.toString();
+	}
+
+	public void updateCurrentFaceColor() {
+		int k = 0;
+		for (int i = 0; i < 6; i++) {
+			if (isVisible[i]) {
+				currentFaceColor[k] = baseVal[i];
+				k++;
+			}
+		}
 	}
 
 	public String getVisibleVal() {
@@ -48,54 +62,92 @@ public class Cube {
 			}
 		}
 		return sb.toString();
+		
+//		StringBuilder sb = new StringBuilder();
+//		for (int i = 0; i < faceCnt; i++) {
+//			
+//				sb.append(initialFaceColor[i]);
+//			
+//		}
+//		return sb.toString();
+		
+		
+		
 
 	}
 
 	public String getVisibleDiffVal() {
 		StringBuilder sb = new StringBuilder();
+		int xCnt = 0;
+		int k = 0;
 		for (int i = 0; i < 6; i++) {
 			if (isVisible[i]) {
+				currentFaceColor[k++] = val[i];
 				if (baseVal[i] == val[i]) {
 					sb.append('.');
 				} else {
 					sb.append('X');
+					xCnt++;
 				}
 			}
 		}
+
+		if (xCnt == 2) {
+		//	System.out.printf("%d %d %d %d \n", currentFaceColor[0], currentFaceColor[1], initialFaceColor[0],
+		//			initialFaceColor[1]);
+			if (faceCnt == 2) {
+				if (currentFaceColor[1] == initialFaceColor[0] && currentFaceColor[0] == initialFaceColor[1]) {
+					sb.append(" correct cube, wrong color location");
+				}
+			}
+		}
+
 		return sb.toString();
 
 	}
 
 	public void setVisible(String visible) {
 		char[] maskChar = visible.toCharArray();
-
+		faceCnt = 0;
 		for (int i = 0; i < maskChar.length; i++) {
 			if (maskChar[i] == 'x') {
+				initialFaceColor[faceCnt] = baseVal[0];
+				faceCnt++;
 				isVisible[0] = true;
 				continue;
 			}
 			if (maskChar[i] == 'y') {
+				initialFaceColor[faceCnt] = baseVal[1];
+				faceCnt++;
 				isVisible[1] = true;
 				continue;
 			}
 			if (maskChar[i] == 'z') {
+				initialFaceColor[faceCnt] = baseVal[2];
+				faceCnt++;
 				isVisible[2] = true;
 				continue;
 			}
 			if (maskChar[i] == 'a') {
+				initialFaceColor[faceCnt] = baseVal[3];
+				faceCnt++;
 				isVisible[3] = true;
 				continue;
 			}
 			if (maskChar[i] == 'b') {
+				initialFaceColor[faceCnt] = baseVal[4];
+				faceCnt++;
 				isVisible[4] = true;
 				continue;
 			}
 			if (maskChar[i] == 'c') {
+				initialFaceColor[faceCnt] = baseVal[5];
+				faceCnt++;
 				isVisible[5] = true;
 				continue;
 			}
 		}
-
+	//	System.out.printf("faceCnt=%d visible=%s \n",faceCnt, visible);
 	}
 
 	public void reset() {

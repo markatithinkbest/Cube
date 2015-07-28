@@ -62,17 +62,14 @@ public class Cube {
 			}
 		}
 		return sb.toString();
-		
-//		StringBuilder sb = new StringBuilder();
-//		for (int i = 0; i < faceCnt; i++) {
-//			
-//				sb.append(initialFaceColor[i]);
-//			
-//		}
-//		return sb.toString();
-		
-		
-		
+
+		// StringBuilder sb = new StringBuilder();
+		// for (int i = 0; i < faceCnt; i++) {
+		//
+		// sb.append(initialFaceColor[i]);
+		//
+		// }
+		// return sb.toString();
 
 	}
 
@@ -93,8 +90,9 @@ public class Cube {
 		}
 
 		if (xCnt == 2) {
-		//	System.out.printf("%d %d %d %d \n", currentFaceColor[0], currentFaceColor[1], initialFaceColor[0],
-		//			initialFaceColor[1]);
+			// System.out.printf("%d %d %d %d \n", currentFaceColor[0],
+			// currentFaceColor[1], initialFaceColor[0],
+			// initialFaceColor[1]);
 			if (faceCnt == 2) {
 				if (currentFaceColor[1] == initialFaceColor[0] && currentFaceColor[0] == initialFaceColor[1]) {
 					sb.append(" correct cube, wrong color location");
@@ -147,7 +145,7 @@ public class Cube {
 				continue;
 			}
 		}
-	//	System.out.printf("faceCnt=%d visible=%s \n",faceCnt, visible);
+		// System.out.printf("faceCnt=%d visible=%s \n",faceCnt, visible);
 	}
 
 	public void reset() {
@@ -493,7 +491,9 @@ public class Cube {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 6; i++) {
-			sb.append(val[i]);
+			if (isVisible[i]){
+				sb.append(val[i]);
+			}
 		}
 		// return "" + x + y + z + a + b + c;
 		return sb.toString();

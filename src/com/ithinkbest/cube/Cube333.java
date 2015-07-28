@@ -3,40 +3,16 @@ package com.ithinkbest.cube;
 public class Cube333 {
 
 	Cube[] cubes;
-	static final String[] visibleArray={
+	static final String[] visibleArray = {
 			// lower ring
-			"abc",
-			"bc",
-			"xbc",
-			"ac",
-			"c",
-			"xc",
-			"ayc",
-			"yc",
-			"xyc",
-	
+			"abc", "bc", "xbc", "ac", "c", "xc", "ayc", "yc", "xyc",
+
 			// middle ring 9-17
-			"ab",
-			"b",
-			"xb",
-			"a",
-			"",
-			"x",
-			"ay",
-			"y",
-			"xy",
-			
+			"ab", "b", "xb", "a", "", "x", "ay", "y", "xy",
+
 			// upper ring
-			"abz",
-			"bz",
-			"xbz",
-			"az",
-			"z",
-			"xz",
-			"ayz",
-			"yz",
-			"xyz"
-				
+			"abz", "bz", "xbz", "az", "z", "xz", "ayz", "yz", "xyz"
+
 	};
 
 	// int[] x1={-1,26,23,20,17,14,11,8,5,2};
@@ -81,6 +57,7 @@ public class Cube333 {
 		for (int i = 0; i < 27; i++) {
 			cubes[i] = new Cube();
 			cubes[i].setVisible(visibleArray[i]);
+			System.out.printf("%2d %s \n", i, cubes[i].toString());
 		}
 	}
 
@@ -217,149 +194,146 @@ public class Cube333 {
 		}
 		return sb.toString();
 	}
-	
-	private String getMaskedColor(String input, String maskStr){
-		if (maskStr.length()==0) return "";
-		
-		StringBuilder sb=new StringBuilder();
-		boolean[] isShown=new boolean[6];
-		
-		char[] maskChar=maskStr.toCharArray();
-		
-		for (int i=0;i<maskChar.length;i++){
-			if (maskChar[i]=='x'){
-				isShown[0]=true;
+	//
+	// private String getMaskedColor(String input, String maskStr){
+	// if (maskStr.length()==0) return "";
+	//
+	// StringBuilder sb=new StringBuilder();
+	// boolean[] isShown=new boolean[6];
+	//
+	// char[] maskChar=maskStr.toCharArray();
+	//
+	// for (int i=0;i<maskChar.length;i++){
+	// if (maskChar[i]=='x'){
+	// isShown[0]=true;
+	// continue;
+	// }
+	// if (maskChar[i]=='y'){
+	// isShown[1]=true;
+	// continue;
+	// }
+	// if (maskChar[i]=='z'){
+	// isShown[2]=true;
+	// continue;
+	// }
+	// if (maskChar[i]=='a'){
+	// isShown[3]=true;
+	// continue;
+	// }
+	// if (maskChar[i]=='b'){
+	// isShown[4]=true;
+	// continue;
+	// }
+	// if (maskChar[i]=='c'){
+	// isShown[5]=true;
+	// continue;
+	// }
+	// }
+	//
+	// char[] inputChar=input.toCharArray();
+	//
+	// for (int i=0;i<6;i++){
+	// if (isShown[i]){
+	// sb.append(inputChar[i]);
+	// }else{
+	// sb.append('.');
+	// }
+	// }
+	//
+	// return sb.toString();
+	// }
+
+	private String getMaskedColorShort(String input, String maskStr) {
+		if (maskStr.length() == 0)
+			return "";
+
+		StringBuilder sb = new StringBuilder();
+		boolean[] isShown = new boolean[6];
+
+		char[] maskChar = maskStr.toCharArray();
+
+		for (int i = 0; i < maskChar.length; i++) {
+			if (maskChar[i] == 'x') {
+				isShown[0] = true;
 				continue;
 			}
-			if (maskChar[i]=='y'){
-				isShown[1]=true;
+			if (maskChar[i] == 'y') {
+				isShown[1] = true;
 				continue;
 			}
-			if (maskChar[i]=='z'){
-				isShown[2]=true;
+			if (maskChar[i] == 'z') {
+				isShown[2] = true;
 				continue;
 			}
-			if (maskChar[i]=='a'){
-				isShown[3]=true;
+			if (maskChar[i] == 'a') {
+				isShown[3] = true;
 				continue;
 			}
-			if (maskChar[i]=='b'){
-				isShown[4]=true;
+			if (maskChar[i] == 'b') {
+				isShown[4] = true;
 				continue;
 			}
-			if (maskChar[i]=='c'){
-				isShown[5]=true;
+			if (maskChar[i] == 'c') {
+				isShown[5] = true;
 				continue;
 			}
 		}
-		
-		char[] inputChar=input.toCharArray();
-		
-		for (int i=0;i<6;i++){
-			if (isShown[i]){
+
+		char[] inputChar = input.toCharArray();
+
+		for (int i = 0; i < 6; i++) {
+			if (isShown[i]) {
 				sb.append(inputChar[i]);
-			}else{
-				sb.append('.');
 			}
+			// else{
+			// sb.append('.');
+			// }
 		}
-		
+
 		return sb.toString();
 	}
-	
-	private String getMaskedColorShort(String input, String maskStr){
-		if (maskStr.length()==0) return "";
-		
-		StringBuilder sb=new StringBuilder();
-		boolean[] isShown=new boolean[6];
-		
-		char[] maskChar=maskStr.toCharArray();
-		
-		for (int i=0;i<maskChar.length;i++){
-			if (maskChar[i]=='x'){
-				isShown[0]=true;
-				continue;
-			}
-			if (maskChar[i]=='y'){
-				isShown[1]=true;
-				continue;
-			}
-			if (maskChar[i]=='z'){
-				isShown[2]=true;
-				continue;
-			}
-			if (maskChar[i]=='a'){
-				isShown[3]=true;
-				continue;
-			}
-			if (maskChar[i]=='b'){
-				isShown[4]=true;
-				continue;
-			}
-			if (maskChar[i]=='c'){
-				isShown[5]=true;
-				continue;
-			}
-		}
-		
-		char[] inputChar=input.toCharArray();
-		
-		for (int i=0;i<6;i++){
-			if (isShown[i]){
-				sb.append(inputChar[i]);
-			}
-//			else{
-//				sb.append('.');
-//			}
-		}
-		
-		return sb.toString();
-	}
-	
+
 	public String toDescription() {
 		StringBuilder sb = new StringBuilder();
-		//int[][] color = getColor();
-		String a,b,c,d,e,f,g,h,i;
-		for (int k = 0; k < 26; k++) {
-			a=cubes[k].toString();
-			b= visibleArray[k];
-			c=this.getMaskedColor(a, b);
-			d=this.getMaskedColorShort(a, b);
-			e=cubes[k].getVisible();
-			f=cubes[k].getVisibleVal();
-			g=cubes[k].getVisibleBaseVal();
-			i=cubes[k].getVisibleDiffVal();
-			
-			
-			
-			
-			//System.out.printf("%2d %s %3s %s\n",k,a,b,c);
-			System.out.printf("%2d %s %6s %3s %6s %3s %3s %3s \n",k,a,c,d,e,f,g,i);
-			
+		// int[][] color = getColor();
+		String a, b, c, d, e, f, g, h, i;
+		for (int k = 0; k < 27; k++) {
+			a = cubes[k].toString();
+			b = visibleArray[k];
+			// c=this.getMaskedColor(a, b);
+			c = "";
+			// d=this.getMaskedColorShort(a, b);
+			d = "";
+			e = cubes[k].getVisible();
+			f = cubes[k].getVisibleVal();
+			g = cubes[k].getVisibleBaseVal();
+			i = cubes[k].getVisibleDiffVal();
+
+			// System.out.printf("%2d %s %3s %s\n",k,a,b,c);
+			if (i.contains("X")) {
+				System.out.printf("%2d %3s %3s %3s \n", k, a, g, i);
+			}
+
 		}
 		return sb.toString();
 	}
-	
-	
-	
 
-	public void showSample(int k){
+	public void showSample(int k) {
 		reset();
 		System.out.println("inital:");
-		System.out.println("   "+toString());
-		//cube #11 and #17, self rotate
+		System.out.println("   " + toString());
+		// cube #11 and #17, self rotate
 		String cmd = "Z23 X13 Z23 X13 Z23 X12 Z21 X13 Z21 X13 Z21 X12";
 		this.rotateByCommand(cmd);
 		System.out.println("cmd:");
-		System.out.println("   "+cmd);
+		System.out.println("   " + cmd);
 		System.out.println("done:");
-		System.out.println("   "+toString());
+		System.out.println("   " + toString());
 		System.out.println("description:");
-		System.out.println("   "+toDescription());
-		
-		
-		
+		System.out.println("   " + toDescription());
+
 	}
-	
+
 	public void showColor() {
 		int[][] color = getColor();
 		String[] colorName = { " ", "藍", "橘", "黃", "綠", "紅", "白" };

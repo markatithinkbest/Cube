@@ -15,10 +15,12 @@ public class Main {
 		// testCubeRotate();
 		// testCube333Rotate();
 		// testSol();
-		testRnd();
-
+		//testRnd();
+		new Cube333().showSample(1);
 	}
 
+	
+	
 	public static void testRnd() {
 		Random rnd = new Random();
 		int face, ring, clock;

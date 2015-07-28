@@ -3,6 +3,41 @@ package com.ithinkbest.cube;
 public class Cube333 {
 
 	Cube[] cubes;
+	static final String[] mask={
+			// lower ring
+			"abc",
+			"bc",
+			"xbc",
+			"ac",
+			"c",
+			"xc",
+			"ybc",
+			"yc",
+			"xyc",
+	
+			// middle ring
+			"ab",
+			"b",
+			"xb",
+			"a",
+			"",
+			"x",
+			"yb",
+			"y",
+			"xy",
+			
+			// upper ring
+			"abz",
+			"bz",
+			"xbz",
+			"az",
+			"z",
+			"xz",
+			"ybz",
+			"yz",
+			"xyz"
+				
+	};
 
 	// int[] x1={-1,26,23,20,17,14,11,8,5,2};
 	// int[] x2={-1,25,22,19,16,13,10,7,4,1};
@@ -48,6 +83,10 @@ public class Cube333 {
 		}
 	}
 
+	public void set(String colorStr) {
+		// 6x9
+	}
+
 	public void rotateByCommand(String cmd) {
 		String[] moves = cmd.split(" ");
 		int face, ring, clock;
@@ -67,13 +106,13 @@ public class Cube333 {
 			clock = temp - ring * 10;
 			// System.out.println(move+" "+face+" "+ring+" "+clock);
 			rotate(face, ring, clock);
-//			System.out.print(move + " " + face + " " + ring + " " + clock + "  ");
-//			showColor();
+			// System.out.print(move + " " + face + " " + ring + " " + clock + "
+			// ");
+			// showColor();
 
 		}
 	}
 
-	
 	public void rotate(int face, int ring, int clock) {
 		Cube temp;
 		// if (face==1){
@@ -166,6 +205,47 @@ public class Cube333 {
 		return color;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		int[][] color = getColor();
+		for (int face = 1; face <= 6; face++) {
+			for (int unit = 1; unit <= 9; unit++) {
+				sb.append(color[face][unit]);
+			}
+		}
+		return sb.toString();
+	}
+	public String toDescription() {
+		StringBuilder sb = new StringBuilder();
+		//int[][] color = getColor();
+		for (int k = 0; k < 26; k++) {
+			System.out.printf("%2d %s\n",k,cubes[k].toString());
+		}
+		return sb.toString();
+	}
+	
+	
+	
+
+	public void showSample(int k){
+		reset();
+		System.out.println("inital:");
+		System.out.println("   "+toString());
+		//cube #11 and #17, self rotate
+		String cmd = "Z23 X13 Z23 X13 Z23 X12 Z21 X13 Z21 X13 Z21 X12";
+		this.rotateByCommand(cmd);
+		System.out.println("cmd:");
+		System.out.println("   "+cmd);
+		System.out.println("done:");
+		System.out.println("   "+toString());
+		System.out.println("description:");
+		System.out.println("   "+toDescription());
+		
+		
+		
+	}
+	
 	public void showColor() {
 		int[][] color = getColor();
 		String[] colorName = { " ", "藍", "橘", "黃", "綠", "紅", "白" };

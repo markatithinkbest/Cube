@@ -1,12 +1,14 @@
 package com.ithinkbest.cube;
 
+import java.util.Arrays;
+
 public class Cube {
-	int x;
-	int y;
-	int z;
-	int a;
-	int b;
-	int c;
+	private int x;
+	private int y;
+	private int z;
+	private int a;
+	private int b;
+	private int c;
 
 	public Cube() {
 		reset();
@@ -20,6 +22,30 @@ public class Cube {
 		a = 4;
 		b = 5;
 		c = 6;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setZ(int z) {
+		this.z = z;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
+
+	public void setB(int b) {
+		this.b = b;
+	}
+
+	public void setC(int c) {
+		this.c = c;
 	}
 
 	public int getX() {
@@ -235,6 +261,12 @@ public class Cube {
 			return;
 		}
 
+	}
+
+	
+	@Override
+	public String toString() {
+		return ""+x+y+z+a+b+c;
 	}
 
 	public int[] getXYZ() {

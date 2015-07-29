@@ -57,7 +57,7 @@ public class Cube333 {
 		for (int i = 0; i < 27; i++) {
 			cubes[i] = new Cube();
 			cubes[i].setVisible(visibleArray[i]);
-			System.out.printf("%2d %s \n", i, cubes[i].toString());
+//			System.out.printf("%2d %s \n", i, cubes[i].toString());
 		}
 	}
 

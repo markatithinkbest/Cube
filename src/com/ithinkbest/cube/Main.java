@@ -15,12 +15,21 @@ public class Main {
 		// testCubeRotate();
 		// testCube333Rotate();
 		// testSol();
-		//testRnd();
 		new Cube333().showSample(1);
+		testRnd();
+		Util util = new Util();
+		String source1 = "Z23 X13 Z23 X13 Z23 X12 Z21 X13 Z21 X13 Z21 X12";
+		String source2 = "X12 Z21 X11 Z21 X11 Z21 X12 Z23 X11 Z23 X11 Z23";
+		String target1 = util.getTranslatedCmd(source1, 1);
+		String target2 = util.getTranslatedCmd(source2, 1);
+		System.out.println("\n" + source1);
+		System.out.println("\n" + target1);
+		System.out.println("\n" + source2);
+		System.out.println("\n" + target2+" --- another solution")		;
+		System.out.println("\n" + util.getBackwards(target1)+" --- original backwards");
+		
 	}
 
-	
-	
 	public static void testRnd() {
 		Random rnd = new Random();
 		int face, ring, clock;
@@ -35,19 +44,19 @@ public class Main {
 		String sol001 = "Z23 X13 Z23 X13 Z23 X12 Z21 X13 Z21 X13 Z21 X12";
 		cube333.rotateByCommand(sol001);
 
-//		System.out.println("\n case --- " + cube333.getCompleteFaceCnt());
+		// System.out.println("\n case --- " + cube333.getCompleteFaceCnt());
 		cube333.showColor();
-//		System.out.println();
+		// System.out.println();
 		int completeFaceCnt = 0;
 
 		String[] steps = sol001.split(" ");
 		Set<String> set = new HashSet<>();
 		for (String step : steps) {
 			set.add(step);
-//			System.out.println(set);
+			// System.out.println(set);
 
 		}
-		System.out.println("\n"+sol001);
+		System.out.println("\n" + sol001);
 
 		String[] elements = set.toArray(new String[set.size()]);
 		for (String element : elements) {
@@ -60,10 +69,10 @@ public class Main {
 		for (int m = 1; m < 200000; m++) {
 			cube333.reset();
 			cube333.rotateByCommand(sol001);
-		//	System.out.printf("\n%7d %s " ,m, cube333.getCompleteFaceCnt());
-//			cube333.showColor();
-//			System.out.println(" "+m);
-			String goodMoves="";
+			// System.out.printf("\n%7d %s " ,m, cube333.getCompleteFaceCnt());
+			// cube333.showColor();
+			// System.out.println(" "+m);
+			String goodMoves = "";
 			for (int i = 0; i < 20; i++) {
 				// r=rnd.nextInt(3) + 1;
 				// ring=rnd.nextInt(3) + 1;
@@ -72,26 +81,26 @@ public class Main {
 				// cube333.rotate(face, ring, clock);
 				//
 				r = rnd.nextInt(elements.length);
-				goodMoves=goodMoves+elements[r]+" ";
+				goodMoves = goodMoves + elements[r] + " ";
 				cube333.rotateByCommand(elements[r]);
-				
+
 				//
 				completeFaceCnt = cube333.getCompleteFaceCnt();
-//				if (completeFaceCnt >= 6) {
-//
-//					// System.out.printf("\n%6d %d%d%d
-//					// %d",i,face,ring,clock,completeFaceCnt);
-//					System.out.printf("\n%6d  %d", m,completeFaceCnt);
-//
-//					cube333.showColor();
-//				}
-				
+				// if (completeFaceCnt >= 6) {
+				//
+				// // System.out.printf("\n%6d %d%d%d
+				// // %d",i,face,ring,clock,completeFaceCnt);
+				// System.out.printf("\n%6d %d", m,completeFaceCnt);
+				//
+				// cube333.showColor();
+				// }
+
 				if (completeFaceCnt == 6) {
-					System.out.printf("\n%6d  %d", m,completeFaceCnt);
+					System.out.printf("\n%6d  %d", m, completeFaceCnt);
 
 					cube333.showColor();
 					System.out.printf("\ngood moves =>  %s", goodMoves);
-						return;
+					return;
 				}
 				// showCube333Color(cube333.getColor());
 
@@ -106,7 +115,6 @@ public class Main {
 
 	public static void testSol() {
 		// String sol001ch="[中右,右下][中右,右下][中右,右翻][中左,右下][中左,右下][中左,右翻]";
-		// String sol001=" Z23 X13 Z23 X13 Z23 X12 Z21 X13 Z21 X13 Z21 X12";
 		String sol001 = "Z23 X13 Z23 X13 Z23 X12 Z21 X13 Z21 X13 Z21 X12";
 		// String sol001="Z23 X13 Z23";
 

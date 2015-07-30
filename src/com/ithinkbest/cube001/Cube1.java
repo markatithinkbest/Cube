@@ -7,7 +7,7 @@ public class Cube1 implements SpecCube {
 	private boolean[] mask;
 
 	public Cube1() {
-		color = new int[] { 0,1, 2, 3, 4, 5 };
+		color = new int[] { 1, 2, 3, 4, 5,6 };
 		mask = new boolean[] { true, true, true, true, true, true };
 	}
 

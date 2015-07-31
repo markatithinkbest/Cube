@@ -33,8 +33,94 @@ public class Main {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
-//		testCorner();
-		testCorner2();
+		// testCorner();
+		// testCorner2();
+		testCorner3();
+
+	}
+
+	public static void testCorner3() {
+		// http://www.cube20.org/
+		String str = "R L U2 F U' D F2 R2 B2 L U2 F' B' U R2 D F2 U R2 U";
+
+		// Cube333 cube333 = new Cube333();
+		// cube333.rotate(0);
+		// cube333.rotate(2);
+
+		// cube333.rotate(9);
+		// cube333.rotate(18);
+		//
+
+		// int[] a = cube333.getCompleteCornerCnt();
+		//
+		// System.out.println(cube333);
+		// System.out.println(Tool.getStr(a));
+		// System.out.println();
+
+		Random rnd = new Random();
+		int r;
+		// Set<String> set=new HashSet<>();
+		// String str;
+		int k = Tool.ROTATE_CORNER.length;
+
+		int[] result=null;
+		int[] steps=new int[30];
+		int stepCnt=0;
+		for (int m = 1; m <= 200; m++) {
+
+			Cube333 cube333 = new Cube333();
+			cube333.rotate(0);
+			System.out.printf("\ncmd:%s\n",Tool.ROTATE_NAME[0]);
+			
+
+			if (m == 1) {
+				int[] a = cube333.getCompleteCornerCnt();
+
+				System.out.println(cube333);
+				System.out.println(Tool.getStr(a));
+				System.out.println();
+			}
+
+			
+			 steps=new int[30];
+			  stepCnt=0;
+				
+			for (int i = 1; i <= 20; i++) {
+				r = Tool.ROTATE_CORNER[rnd.nextInt(k)];
+				//System.out.println("r=" + r + " ");
+				cube333.rotate(r);
+				steps[stepCnt]=r;
+				stepCnt++;
+				
+				result=cube333.getCompleteCornerCnt();
+				str = Tool.getStr(cube333.getCompleteCornerCnt());
+				System.out.printf("%5d %2d cubes=%s %s\n",m,i,cube333,str);
+				
+				
+				boolean isStep1Done=Tool.is8CornerReady(result);
+				
+				if (isStep1Done){
+					System.out.println("\n---done---");
+					System.out.printf("\n%s\n",Tool.getStrWithSpace(steps,stepCnt));
+					System.out.printf("\n%s\n",Tool.getRotateName(steps,stepCnt));
+					
+					return;
+				}
+			
+
+				
+				// boolean isAdd=set.add(str);
+
+				// if (isAdd){
+				// System.out.println("---current cnt="+set.size());
+				//// System.out.println(set);
+				// }
+				//System.out.println("  " + str);
+				// System.out.println();
+			}
+		}
+		// System.out.println("---done---");
+		//
 
 	}
 
@@ -44,45 +130,53 @@ public class Main {
 		System.out.println(cube333);
 		System.out.println(Tool.getStr(a));
 		System.out.println();
-		
-		Random rnd=new Random();
-		for (int i=1;i<=20;i++){
+
+		Random rnd = new Random();
+
+		Set<String> set = new HashSet<>();
+		String str;
+		for (int i = 1; i <= 20000000; i++) {
 			cube333.rotate(rnd.nextInt(27));
-			System.out.println(cube333);
-			System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
-			System.out.println();
+			// System.out.println(cube333);
+			str = Tool.getStr(cube333.getCompleteCornerCnt());
+
+			boolean isAdd = set.add(str);
+
+			if (isAdd) {
+				System.out.println("---current cnt=" + set.size());
+				// System.out.println(set);
+			}
+			// System.out.println(str);
+			// System.out.println();
 		}
-		
-		
-		
-		
+		System.out.println("---done---");
+		//
+
 	}
-	
+
 	public static void testCorner() {
 		Cube333 cube333 = new Cube333();
 		int[] a = cube333.getCompleteCornerCnt();
 		System.out.println(cube333);
 		System.out.println(Tool.getStr(a));
 		System.out.println();
-		
+
 		cube333.rotate(0);
 		System.out.println(cube333);
 		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
-		
+
 		cube333.rotate(0);
 		System.out.println(cube333);
 		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
-		
+
 		cube333.rotate(0);
 		System.out.println(cube333);
 		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
-		
+
 		cube333.rotate(0);
 		System.out.println(cube333);
 		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
-		
-		
-		
+
 	}
 
 	public static void showVisibleFaces() {

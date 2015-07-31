@@ -7,8 +7,9 @@ import java.util.Map;
 
 public class Util {
 
-	public static final String[] sampleCmd = { 
-	//		"Z21 X12 Z20 X11 Z21 X13 Z21 X12 Z23 X13 Z23 X13 Z23 X12",
+
+	public static final String[] sampleCmd = {
+			// "Z21 X12 Z20 X11 Z21 X13 Z21 X12 Z23 X13 Z23 X13 Z23 X12",
 			"Z21 X12 Z23 Z21 X12 X13 Z21 X13 Z21 X12 Z23 X13 Z23 X13 Z23 X12",
 			"X13 X13 Z23 X13 Z23 X13 Z23 X13 X13 X13 X12 X13 Z21 X13 Z23 Z23 Z23 X13 Z21",
 			"X13 X13 Z21 X12 X13 X12 Z21 X13 Z21 X12 Z23 Z23 Z21 X13 Z23 X13 Z23",
@@ -165,29 +166,28 @@ public class Util {
 		// System.out.println(" item list is "+itemList);
 
 		Command c1, c2;
-		
+
 		// Z20 X12 Z23 X13 Z23 X13 Z23 X12 Z21 X13 Z21 X13 Z21
-//		for (int i = itemList.size() - 1; i >= 1; i--) {
-		for (int i = itemList.size()-1 ; i >= 0; i--) {
-				
+		// for (int i = itemList.size() - 1; i >= 1; i--) {
+		for (int i = itemList.size() - 1; i >= 0; i--) {
+
 			c1 = new Command(itemList.get(i));
-			
+
 			// for not completely solved cases
-			if (c1.degree==0){
+			if (c1.degree == 0) {
 				itemList.remove(i);
 				//
-//				( 1) Z23 X13 Z23 X13 Z23 X13 Z20 X13 Z21 X13 Z21 X13 Z21 X12 
-//				.....Z23 X13 Z23 X13 Z23 X13 X13 Z21 X13 Z21 X13 Z21 X12 
+				// ( 1) Z23 X13 Z23 X13 Z23 X13 Z20 X13 Z21 X13 Z21 X13 Z21 X12
+				// .....Z23 X13 Z23 X13 Z23 X13 X13 Z21 X13 Z21 X13 Z21 X12
 				i++; // NEED TO MOVE BACK ONE STEP FOR POSSIBLE COMBINE
-				     //
+						//
 				continue;
 			}
-			
-		
-			if (i==0){
+
+			if (i == 0) {
 				break;
 			}
-			
+
 			c2 = new Command(itemList.get(i - 1));
 			if (c1.face == c2.face && c1.ring == c2.ring) {
 				int temp = c1.degree + c2.degree;
@@ -199,12 +199,12 @@ public class Util {
 				itemList.remove(i);
 				c2.setDegree(temp);
 				if (temp == 0) {
-					itemList.remove(i-1);// more rotate in one complete circle
+					itemList.remove(i - 1);// more rotate in one complete circle
 					i++;
-					
+
 				} else {
 					itemList.set(i - 1, c2.toString());
-					
+
 				}
 				// System.out.println(" ... "+itemList);
 

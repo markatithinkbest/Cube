@@ -1,7 +1,54 @@
 package com.ithinkbest.cube;
 
 public class Tool {
-
+	public static final String[] ROTATE_NAME = {
+		//
+			"X11",
+			"X12",
+			"X13",
+			"X21",
+			"X22",
+			"X23",
+			"X31",
+			"X32",
+			"X33",
+			"Y11",
+			"Y12",
+			"Y13",
+			"Y21",
+			"Y22",
+			"Y23",
+			"Y31",
+			"Y32",
+			"Y33",
+			"Z11",
+			"Z12",
+			"Z13",
+			"Z21",
+			"Z22",
+			"Z23",
+			"Z31",
+			"Z32",
+			"Z33",
+		
+		
+	};
+			
+	
+	public static final int[] ROTATE_CORNER = {
+			//
+			0, 1, 2, // X(1)
+			6, 7, 8, // X(-1)
+			9, 10, 11, // Y(1)
+			15, 16, 17, // Y(-1)
+			18, 19, 20, // Z(1)
+			24, 25, 26 };// Z(-1)
+	public static final int[] ROTATE_EDGE = {
+			//
+			3, 4, 5, // X(0)
+			12, 13, 14, // Y(0)
+			21, 22, 23, // Z(0)
+	};
 	public static final int[] DEGREE, RING, FACE;
 	// public static final int[][][] XYZ;
 	public static final int[][] CORNER_SET = {
@@ -130,6 +177,17 @@ public class Tool {
 
 	}
 	
+
+	public static boolean is8CornerReady(int [] faceCnts){
+		for (int c:faceCnts){
+			if (c!=5){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 	public static String getStr(int [] colors){
 		StringBuilder sb=new StringBuilder();
 		for (int c:colors){
@@ -137,6 +195,23 @@ public class Tool {
 		}
 		return sb.toString();
 	}
+
+	public static String getStrWithSpace(int [] colors, int cnt){
+		StringBuilder sb=new StringBuilder();
+		for (int i=0;i<cnt;i++){
+			sb.append(colors[i]+" ");
+		}
+		return sb.toString();
+	}
+	
+	public static String getRotateName(int [] colors, int cnt){
+		StringBuilder sb=new StringBuilder();
+		for (int i=0;i<cnt;i++){
+			sb.append(ROTATE_NAME[ colors[i]]+" ");
+		}
+		return sb.toString();
+	}
+	
 	
 	
 	public static String getFaceColorStr(int [] colors){

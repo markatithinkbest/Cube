@@ -96,7 +96,7 @@ public class Cube333 {
 		int face = 1+Tool.FACE[k];
 		int ring = 1+Tool.RING[k];
 		int degree = 1+Tool.DEGREE[k];
-		System.out.printf("rotate(%d) face=%d, ring=%d, degree=%d \n",k,face,ring,degree);
+//		System.out.printf("rotate(%d) face=%d, ring=%d, degree=%d \n",k,face,ring,degree);
 		rotate(face, ring, degree);
 
 	}

@@ -24,6 +24,9 @@ public class Test {
 		rubik.rotate(0);
 		System.out.println( rubik.getFaceColor());
 		System.out.println( rubik.getFaceColorTextImg());
+		System.out.println( rubik.getFaceColorTextImg(".RBYogw"));
+		System.out.println( rubik.getFaceColorTextImg(".紅藍黃橘綠白"));
+		
 	}
 	
 }

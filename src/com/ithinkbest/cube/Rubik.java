@@ -132,6 +132,43 @@ public class Rubik {
 		return sb.toString();
 	}
 	
+	public String getFaceColorTextImg(String str){
+		StringBuilder sb=new StringBuilder();
+		int temp;
+		for (int k=0;k<6;k++){
+			for (int i=0;i<3;i++){				
+				temp=cubes[FACE_COLOR[k][i]].getFaceColor(k);
+				sb.append(str.substring(temp,1+temp))
+				.append(' ');
+				
+			}
+			sb.append("  ");
+		}
+		sb.append("\n");
+		for (int k=0;k<6;k++){
+			for (int i=3;i<6;i++){				
+				temp=cubes[FACE_COLOR[k][i]].getFaceColor(k);
+				sb.append(str.substring(temp,1+temp))
+				.append(' ');
+			}
+			sb.append("  ");
+		}
+		sb.append("\n");
+		for (int k=0;k<6;k++){
+			for (int i=6;i<9;i++){				
+				temp=cubes[FACE_COLOR[k][i]].getFaceColor(k);
+				sb.append(str.substring(temp,1+temp))
+				.append(' ');
+			}
+			sb.append("  ");
+		}
+		sb.append("\n");
+		
+		
+		
+			
+		return sb.toString();
+	}
 	
 	
 

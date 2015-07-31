@@ -23,7 +23,7 @@ public class Test {
 		System.out.println( rubik.getFaceColor());
 		rubik.rotate(0);
 		System.out.println( rubik.getFaceColor());
-		
+		System.out.println( rubik.getFaceColorTextImg());
 	}
 	
 }

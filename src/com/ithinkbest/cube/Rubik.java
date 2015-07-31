@@ -98,6 +98,42 @@ public class Rubik {
 			
 		return sb.toString();
 	}
+	
+	public String getFaceColorTextImg(){
+		StringBuilder sb=new StringBuilder();
+		
+		for (int k=0;k<6;k++){
+			for (int i=0;i<3;i++){				
+				sb.append(cubes[FACE_COLOR[k][i]].getFaceColor(k))
+				.append(' ');
+				
+			}
+			sb.append("  ");
+		}
+		sb.append("\n");
+		for (int k=0;k<6;k++){
+			for (int i=3;i<6;i++){				
+				sb.append(cubes[FACE_COLOR[k][i]].getFaceColor(k)).append(' ');
+			}
+			sb.append("  ");
+		}
+		sb.append("\n");
+		for (int k=0;k<6;k++){
+			for (int i=6;i<9;i++){				
+				sb.append(cubes[FACE_COLOR[k][i]].getFaceColor(k)).append(' ');
+			}
+			sb.append("  ");
+		}
+		sb.append("\n");
+		
+		
+		
+			
+		return sb.toString();
+	}
+	
+	
+	
 
 	@Override
 	public String toString() {
@@ -131,7 +167,7 @@ public class Rubik {
 			cubes[RING[r][3]].setColor(cubes[RING[r][7]].getColor());
 			cubes[RING[r][7]].setColor(cubes[RING[r][5]].getColor());
 			cubes[RING[r][5]].setColor(temp);
-
+//			System.out.printf("%d <-%d< %d<-%d\n",RING[r][0],RING[r][6],RING[r][8],RING[r][2]);
 			break;
 		case 1: // 180 degree
 			temp = cubes[RING[r][0]].getColor();
@@ -148,7 +184,7 @@ public class Rubik {
 			temp = cubes[RING[r][5]].getColor();
 			cubes[RING[r][5]].setColor(cubes[RING[r][3]].getColor());
 			cubes[RING[r][3]].setColor(temp);
-
+			break;
 		case 2: // 270 degree
 			temp = cubes[RING[r][0]].getColor();
 			cubes[RING[r][0]].setColor(cubes[RING[r][2]].getColor());

@@ -1,6 +1,7 @@
 package com.ithinkbest.cube;
 
 public class Cube333 {
+	static
 
 	Cube[] cubes;
 	static final String[] visibleArray = {
@@ -57,7 +58,7 @@ public class Cube333 {
 		for (int i = 0; i < 27; i++) {
 			cubes[i] = new Cube();
 			cubes[i].setVisible(visibleArray[i]);
-//			System.out.printf("%2d %s \n", i, cubes[i].toString());
+			// System.out.printf("%2d %s \n", i, cubes[i].toString());
 		}
 	}
 
@@ -91,7 +92,16 @@ public class Cube333 {
 		}
 	}
 
-	public void rotate(int face, int ring, int clock) {
+	public void rotate(int k) {
+		int face = 1+Tool.FACE[k];
+		int ring = 1+Tool.RING[k];
+		int degree = 1+Tool.DEGREE[k];
+		System.out.printf("rotate(%d) face=%d, ring=%d, degree=%d \n",k,face,ring,degree);
+		rotate(face, ring, degree);
+
+	}
+
+	public void rotate(int face, int ring, int degree) {
 		Cube temp;
 		// if (face==1){
 		// temp =cubes[xi[ring][1]];
@@ -110,7 +120,7 @@ public class Cube333 {
 		// cubes[xi[ring][k]].rotate(face, clock);
 		// }
 		// }
-		if (clock == 1) {
+		if (degree == 1) {
 			temp = cubes[xyz[face][ring][1]];
 			cubes[xyz[face][ring][1]] = cubes[xyz[face][ring][7]];
 			cubes[xyz[face][ring][7]] = cubes[xyz[face][ring][9]];
@@ -124,10 +134,10 @@ public class Cube333 {
 			cubes[xyz[face][ring][6]] = temp;
 
 			for (int k = 1; k <= 9; k++) {
-				cubes[xyz[face][ring][k]].rotate(face, clock);
+				cubes[xyz[face][ring][k]].rotate(face, degree);
 			}
 		}
-		if (clock == 2) {
+		if (degree == 2) {
 			temp = cubes[xyz[face][ring][1]];
 			cubes[xyz[face][ring][1]] = cubes[xyz[face][ring][9]];
 			cubes[xyz[face][ring][9]] = temp;
@@ -145,10 +155,10 @@ public class Cube333 {
 			cubes[xyz[face][ring][6]] = temp;
 
 			for (int k = 1; k <= 9; k++) {
-				cubes[xyz[face][ring][k]].rotate(face, clock);
+				cubes[xyz[face][ring][k]].rotate(face, degree);
 			}
 		}
-		if (clock == 3) {
+		if (degree == 3) {
 			temp = cubes[xyz[face][ring][1]];
 			cubes[xyz[face][ring][1]] = cubes[xyz[face][ring][3]];
 			cubes[xyz[face][ring][3]] = cubes[xyz[face][ring][9]];
@@ -162,7 +172,7 @@ public class Cube333 {
 			cubes[xyz[face][ring][4]] = temp;
 
 			for (int k = 1; k <= 9; k++) {
-				cubes[xyz[face][ring][k]].rotate(face, clock);
+				cubes[xyz[face][ring][k]].rotate(face, degree);
 			}
 		}
 
@@ -352,9 +362,78 @@ public class Cube333 {
 		// System.out.println();
 	}
 
+	public int[] getCompleteCornerCnt() {
+		int cnt = 0;
+		int[] val=new int[6];
+		
+		int[] index = new int[4];
+		Cube[] corners = new Cube[4];
+		for (int i = 0; i < Tool.CORNER_SET.length; i++) {
+//			System.out.printf(" --- corner set = %d  ---\n", i);
+			index[0] = Tool.CORNER_SET[i][0];
+			index[1] = Tool.CORNER_SET[i][1];
+			index[2] = Tool.CORNER_SET[i][2];
+			index[3] = Tool.CORNER_SET[i][3];
+
+			corners[0] = cubes[index[0]];
+			corners[1] = cubes[index[1]];
+			corners[2] = cubes[index[2]];
+			corners[3] = cubes[index[3]];
+
+			int faceOkCnt = 0;
+
+			for (int face = 0; face < 6; face++) {
+//				System.out.printf(" face=%d \n", face);
+
+		
+				int sameColorCnt = 0;
+				int visibleFaceCnt = 0;
+				int tempColor = -1;
+				for (int item = 0; item < 4; item++) {
+//					System.out.printf(" #%d=>%d %b", item, index[item], Tool.VISIBLE_FACE[index[item]][face]);
+
+					if (Tool.VISIBLE_FACE[index[item]][face]) {
+//						System.out.printf(" ...to check, color=%d", corners[item].getFaceColors()[face]);
+						
+						visibleFaceCnt++;
+						if (visibleFaceCnt == 1) {
+							tempColor = corners[item].getFaceColors()[face];
+							sameColorCnt++;
+						} else {
+							if (corners[item].getFaceColors()[face] == tempColor) {
+								sameColorCnt++;
+								
+							}else{
+								break;
+							}
+						}
+
+//						System.out.printf(" ...visibleFaceCnt=%d, sameColorCnt=%d, tempColor=%d, \n",visibleFaceCnt,sameColorCnt, corners[item].getFaceColors()[face]);
+					} else {
+//						System.out.printf(" \n");
+
+					}
+
+				}
+				if (sameColorCnt == visibleFaceCnt) {
+					faceOkCnt++;
+				}
+
+//				System.out.printf("--------- faceOkCnt=%d\n", faceOkCnt);
+
+			}
+
+			// System.out.printf("\n---------\n");
+//			System.out.printf(" /// corner set = %d  faceOkCnt=%d ///\n", i,faceOkCnt);
+			val[i]=faceOkCnt-1;
+		}
+
+		return val;
+	}
+
 	public int getCompleteFaceCnt() {
 		int[][] color = getColor();
-		String[] colorName = { " ", "藍", "橘", "黃", "綠", "紅", "白" };
+		// String[] colorName = { " ", "藍", "橘", "黃", "綠", "紅", "白" };
 		int cnt = 0;
 		int temp = 0;
 		for (int face = 1; face <= 6; face++) {

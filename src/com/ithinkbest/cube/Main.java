@@ -26,12 +26,83 @@ public class Main {
 		// testSol();
 		// testGoodcombo();
 		// testNormalizedCmd();
-		try {
-			filterLast2Cubes();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		// try {
+		// filterLast2Cubes();
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+//		testCorner();
+		testCorner2();
+
+	}
+
+	public static void testCorner2() {
+		Cube333 cube333 = new Cube333();
+		int[] a = cube333.getCompleteCornerCnt();
+		System.out.println(cube333);
+		System.out.println(Tool.getStr(a));
+		System.out.println();
+		
+		Random rnd=new Random();
+		for (int i=1;i<=20;i++){
+			cube333.rotate(rnd.nextInt(27));
+			System.out.println(cube333);
+			System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
+			System.out.println();
 		}
+		
+		
+		
+		
+	}
+	
+	public static void testCorner() {
+		Cube333 cube333 = new Cube333();
+		int[] a = cube333.getCompleteCornerCnt();
+		System.out.println(cube333);
+		System.out.println(Tool.getStr(a));
+		System.out.println();
+		
+		cube333.rotate(0);
+		System.out.println(cube333);
+		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
+		
+		cube333.rotate(0);
+		System.out.println(cube333);
+		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
+		
+		cube333.rotate(0);
+		System.out.println(cube333);
+		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
+		
+		cube333.rotate(0);
+		System.out.println(cube333);
+		System.out.println(Tool.getStr(cube333.getCompleteCornerCnt()));
+		
+		
+		
+	}
+
+	public static void showVisibleFaces() {
+
+		//
+		StringBuilder sb = new StringBuilder();
+		for (int cube = 0; cube < 27; cube++) {
+			sb.append(String.format("%2d ", cube));
+
+			for (int face = 0; face < 6; face++) {
+				if (Tool.VISIBLE_FACE[cube][face]) {
+					sb.append("#");
+				} else {
+					sb.append(".");
+				}
+			}
+			sb.append("\n");
+
+		}
+		System.out.print(sb.toString());
 
 	}
 

@@ -21,7 +21,9 @@ public class Cube {
 	public Cube() {
 		reset();
 	}
-
+	public int[] getFaceColors(){
+		return val;
+	}
 	public String getVisible() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 6; i++) {
